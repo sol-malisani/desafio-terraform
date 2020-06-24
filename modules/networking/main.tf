@@ -17,14 +17,14 @@ resource "aws_internet_gateway" "internet_gw" {
 }
 
 # DHCP
-resource "aws_vcp_dhcp_options" "dns_resolver" {
+resource "aws_vpc_dhcp_options" "dns_resolver" {
   domain_name_servers = ["AmazonProvidedDNS"]
 }
 
 # associate DHCP with vpc
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
-  vpc_id          = "${aws_vpc.vpc.id}"
-  dhcp_options_id = "${aws_vpc_dhcp_options.dns_resolver.id}"
+  vpc_id          = aws_vpc.vpc.id
+  dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
 }
 
 # subnets
